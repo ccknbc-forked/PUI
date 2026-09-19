@@ -8,6 +8,7 @@ class Canvas(FBase):
         self.ui = None
         self.painter = painter
         self.args = args
+        self.pixel_density = 1.0
 
     def update(self, prev):
         if prev and prev.ui:

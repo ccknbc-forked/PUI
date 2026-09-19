@@ -62,6 +62,7 @@ class PUIQtCanvas(QtWidgets.QWidget):
 
     def paintEvent(self, event):
         puinode = self.puinode.get_node()
+        puinode.pixel_density = max(1.0, float(self.devicePixelRatioF()))
         puinode.qpainter = QPainter()
         puinode.qpainter.begin(self)
         puinode.qpainter.setRenderHints(QtGui.QPainter.Antialiasing, True)
@@ -107,6 +108,7 @@ class Canvas(QtBaseWidget):
         self.ui = None
         self.painter = painter
         self.args = args
+        self.pixel_density = 1.0
 
     def update(self, prev):
         if prev and prev.ui:

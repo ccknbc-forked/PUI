@@ -11,6 +11,7 @@ class Canvas(WxBaseWidget):
         self.ui = None
         self.painter = painter
         self.args = args
+        self.pixel_density = 1.0
 
 
     def update(self, prev):
@@ -76,6 +77,13 @@ class Canvas(WxBaseWidget):
 
     def _paint(self, event):
         node = self.get_node()
+
+        try:
+            node.pixel_density = max(
+                1.0, float(node.ui.GetContentScaleFactor())
+            )
+        except (AttributeError, TypeError, ValueError):
+            node.pixel_density = 1.0
 
         node.dc = wx.PaintDC(node.ui)
         if not node.style_bgcolor is None:

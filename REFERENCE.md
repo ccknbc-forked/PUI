@@ -305,6 +305,8 @@ RadioButton(label, value, model)
 [Example](cookbook/canvas.py)
 ``` python
 def painter(canvas):
+    # Physical pixels per logical canvas pixel; 1.0 when unavailable.
+    pixel_density = canvas.pixel_density
     canvas.drawText(x, y, text, w=None, h=None, size=12, color=None, rotate=0, anchor=Anchor.LEFT_TOP)
     canvas.drawLine(x1, y1, x2, y2, color=0xFF0000, width=1)
     canvas.drawPolyline([x1, y2, ..., xn, yn], color=0xFF0000, width=1)
@@ -313,6 +315,12 @@ def painter(canvas):
 
 Canvas(painter)
 ```
+
+Canvas drawing coordinates, `canvas.width`, and `canvas.height` use logical
+pixels. `canvas.pixel_density` reports the number of physical display pixels
+per logical pixel and is refreshed before painting where supported. Use it to
+select the resolution of raster content for HiDPI displays. Its fallback value
+is `1.0`.
 
 ### Callbacks
 * .dblclick

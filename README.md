@@ -154,6 +154,9 @@ class Example(Application):
 
     @staticmethod
     def painter(canvas, var):
+        # Canvas coordinates are logical pixels. Use pixel_density when
+        # preparing raster images for HiDPI displays.
+        raster_scale = canvas.pixel_density
         canvas.drawText(var, var/2, f"blah {var}")
         canvas.drawLine(var, var, var*2, var*3, color=0xFFFF00)
 
@@ -166,6 +169,14 @@ class Example(Application):
 root = Example()
 root.run()
 ```
+
+`canvas.pixel_density` is the number of physical display pixels per logical
+canvas pixel. It is updated before each paint where the backend exposes the
+display scale, so moving a window between displays is handled automatically.
+Canvas coordinates remain in logical pixels; multiply raster image resolution
+by `pixel_density` when generating HiDPI content. Backends that cannot report a
+display scale use `1.0`.
+
 ![Canvas](screenshots/pyside6_canvas.gif)
 
 ## Cookbook
