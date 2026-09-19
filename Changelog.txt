@@ -1,3 +1,6 @@
+0.47:
+    * Canvas: expose display pixel density for HiDPI raster content
+
 0.46:
     * PySide6.Scroll: handle scrollbar and resize signals safely during V-DOM sync
 
