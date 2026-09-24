@@ -40,6 +40,19 @@ class PUIQtCanvas(QtWidgets.QWidget):
         e.x, e.y = event.position().toPoint().toTuple()
         self.puinode._mousemove(e)
 
+    def enterEvent(self, event):
+        e = PUIEvent()
+        e.x, e.y = event.position().toPoint().toTuple()
+        self.puinode._mouseenter(e)
+        super().enterEvent(event)
+
+    def leaveEvent(self, event):
+        e = PUIEvent()
+        cursor = self.mapFromGlobal(QtGui.QCursor.pos())
+        e.x, e.y = cursor.x(), cursor.y()
+        self.puinode._mouseleave(e)
+        super().leaveEvent(event)
+
     def wheelEvent(self, event):
         e = PUIEvent()
         e.x, e.y = event.position().toPoint().toTuple()

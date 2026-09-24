@@ -1,3 +1,6 @@
+0.48:
+    * PySide6.Canvas: add mouseenter and mouseleave callbacks
+
 0.47:
     * Canvas: expose display pixel density for HiDPI raster content
 

@@ -79,6 +79,8 @@ class PUINode():
         self._onMouseDown = None
         self._onMouseUp = None
         self._onMouseMove = None
+        self._onMouseEnter = None
+        self._onMouseLeave = None
         self._onWheel = None
         self._onDragEntered = None
         self._onDropped = None
@@ -189,6 +191,8 @@ class PUINode():
         self._onMouseDown = None
         self._onMouseUp = None
         self._onMouseMove = None
+        self._onMouseEnter = None
+        self._onMouseLeave = None
         self._onWheel = None
         self._onDragEntered = None
         self._onDropped = None
@@ -218,6 +222,8 @@ class PUINode():
         self._onMouseDown = None
         self._onMouseUp = None
         self._onMouseMove = None
+        self._onMouseEnter = None
+        self._onMouseLeave = None
         self._onWheel = None
         self._onDragEntered = None
         self._onDropped = None
@@ -436,6 +442,26 @@ class PUINode():
         node = self.get_node()
         if node._onMouseMove:
             cb, cb_args, cb_kwargs = node._onMouseMove
+            cb(e, *cb_args, **cb_kwargs)
+
+    def mouseenter(self, callback, *cb_args, **cb_kwargs):
+        self._onMouseEnter = callback, cb_args, cb_kwargs
+        return self
+
+    def _mouseenter(self, e, *args, **kwargs):
+        node = self.get_node()
+        if node._onMouseEnter:
+            cb, cb_args, cb_kwargs = node._onMouseEnter
+            cb(e, *cb_args, **cb_kwargs)
+
+    def mouseleave(self, callback, *cb_args, **cb_kwargs):
+        self._onMouseLeave = callback, cb_args, cb_kwargs
+        return self
+
+    def _mouseleave(self, e, *args, **kwargs):
+        node = self.get_node()
+        if node._onMouseLeave:
+            cb, cb_args, cb_kwargs = node._onMouseLeave
             cb(e, *cb_args, **cb_kwargs)
 
     def wheel(self, callback, *cb_args, **cb_kwargs):
